@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -euo pipefail
+
+CACHE_PATH="$(dirname "${BASH_SOURCE[0]}")/ln-cache/$(pwd)"
+
+while IFS= read -r LINK 
+do
+    echo "Removing link $LINK"
+    rm "$LINK"
+done < "$CACHE_PATH"
+
+rm -rf "$CACHE_PATH"

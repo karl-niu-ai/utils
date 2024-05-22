@@ -1,0 +1,26 @@
+#!/bin/bash
+
+FROM_DIR="$1"
+TO_DIR="$2"
+
+# Make the paths absolute
+FROM_DIR=$(realpath "$FROM_DIR")
+TO_DIR=$(realpath "$TO_DIR")
+
+# Find common part of the paths
+PREFIX=""
+COMMON_PART=$FROM_DIR
+while [[ "${TO_DIR#"$COMMON_PART"}" == "$TO_DIR" && "$COMMON_PART" != "/" ]]; do
+    COMMON_PART=$(dirname "$COMMON_PART")
+    PREFIX="$PREFIX../"
+done
+
+# Calculate the relative path
+if [[ "$COMMON_PART" == "/" ]]; then
+    RELATIVE_PATH=$TO_DIR
+else
+    COMMON_PART_LENGTH=${#COMMON_PART}
+    RELATIVE_PATH="$PREFIX${TO_DIR:$COMMON_PART_LENGTH+1}"
+fi
+
+echo "$RELATIVE_PATH"
