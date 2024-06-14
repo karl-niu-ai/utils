@@ -2,12 +2,12 @@
 
 if [[ $(pwd) =~ ^(.*applied2).* ]]
 then
-    echo "in applied2"
-    "${BASH_REMATCH[1]}/dev/containers/dev/into.sh" || redev
+    echo "in applied2: $(basename "$(pwd)")"
+    "${BASH_REMATCH[1]}/dev/containers/dev/into.sh"
 elif [[ $(pwd) =~ ^(.*mosaic-eng).* ]]
 then
-    echo "in mosaic-eng"
-    "${BASH_REMATCH[1]}/docker/dev/into.sh" || redev
+    echo "in mosaic-eng repo: $(basename "$(pwd)")"
+    "${BASH_REMATCH[1]}/docker/dev/into.sh" -name "$(basename "$(pwd)")"
 else
     echo "not in applied2 or mosaic-eng"
 fi
