@@ -1,0 +1,3 @@
+#!/bin/bash
+
+kc simian-example-workbench-aws simian-workbench "$@"
