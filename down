@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -x
+
+if [[ $(pwd) =~ ^(.*applied2).* ]]
+then
+    echo "in applied2: $(basename "$(pwd)")"
+    "${BASH_REMATCH[1]}/dev/containers/dev/remove.sh" -name "$(basename "$(pwd)")"
+elif [[ $(pwd) =~ ^(.*mosaic-eng).*$ ]]
+then
+    echo "in mosaic-eng repo: $(basename "$(pwd)")"
+    "${BASH_REMATCH[1]}/docker/dev/remove.sh" -name "$(basename "$(pwd)")"
+else
+    echo "not in applied2 or mosaic-eng"
+fi
