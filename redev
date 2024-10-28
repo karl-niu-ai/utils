@@ -2,7 +2,7 @@
 
 set -x
 
-docker container prune
+docker container prune -y
 
 if [[ $(pwd) =~ ^(.*applied2).* ]]
 then
